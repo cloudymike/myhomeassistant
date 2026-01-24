@@ -1,0 +1,3 @@
+[submodule "esp32c3/micropythonexamples"]
+	path = esp32c3/micropythonexamples
+	url = git@github.com:cloudymike/micropythonexamples.git
