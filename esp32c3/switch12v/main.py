@@ -50,7 +50,7 @@ def on_switch_command(sender: mha.HASwitch, state: bool):
 
 switch.on_command(on_switch_command)
 
-mqtt.begin(mqtthost.MQTT_HOST)
+mqtt.begin(mqtthost.MQTT_HOST,mqtthost.MQTT_PORT)
 
 last_time = time.time()
 
