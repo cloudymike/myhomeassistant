@@ -4,6 +4,7 @@
 
 # components
 HAComponentBinarySensor = "binary_sensor"
+HAComponentIntegerSensor = "integer_sensor"
 HAComponentButton = "button"
 HAComponentCamera = "camera"
 HAComponentCover = "cover"

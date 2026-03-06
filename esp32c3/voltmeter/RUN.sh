@@ -65,6 +65,7 @@ $PUSHCMD $TOPDIR/mha
 
 echo loading other libraries
 $PUSHCMD $UPYDIR/wlan/wlan.py
+$PUSHCMD $UPYDIR/LED/LED.py
 
 echo loading main
 $PUSHCMD main.py
