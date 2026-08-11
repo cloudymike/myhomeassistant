@@ -20,7 +20,10 @@ echo loading configs
 $PUSHCMD ~/secrets/wlanconfig.py
 
 # This is just to get the host IP address, you may have to change it
-echo "MQTT_HOST='$(hostname -I | awk '{print $1}')'" >mqtthost.py
+# This is just to get the host IP address, you may have to change it
+cp ../../config/config.py mqtthost.py
+echo "MQTT_HOST='$(hostname -I | awk '{print $1}')'" >>mqtthost.py
+cat mqtthost.py
 $PUSHCMD mqtthost.py
 
 echo loading mha
