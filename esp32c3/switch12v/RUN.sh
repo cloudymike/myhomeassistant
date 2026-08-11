@@ -3,12 +3,10 @@
 usage ()
 {
   echo "USAGE: $0 options"
-  echo "-f     Fast load, do not load files not changed since last load"
-  echo "-i     IP, implies used of webrepl"
-  echo "-p     Password to use with webrepl, default: $WEBREPLPASS"
-  echo "-P     Port to use for USB connection, default: $PORT"
-  echo "-s     Remove state file (state.json)"
   echo "-c     Only update config"
+  echo "-h     Help"
+  echo "-i     IP of mosquitto server"
+  echo "-P     Port to use for USB connection, default: $PORT"
   exit 0
 }
 
@@ -23,6 +21,9 @@ while getopts "ci:h" arg; do
       ;;
     i)
       IP=$OPTARG
+      ;;
+    P)
+      USBPORT=$OPTARG
       ;;
     *) usage
     ;;
@@ -48,7 +49,7 @@ echo loading configs
 # Enter your path to your WLAN configuration file here, see ../wlan/wlanconfig.py for example
 $PUSHCMD ~/secrets/wlanconfig.py
 
-# This is just to get the host IP address, you may have to change it
+# This is to get the mosquitto host IP address
 cp ../../config/config.py mqtthost.py
 if [ "$IP" = "" ]
 then
