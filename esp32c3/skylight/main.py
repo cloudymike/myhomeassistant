@@ -14,6 +14,8 @@ import machine
 import binascii
 
 DaSwitch = machine.Pin(3, machine.Pin.OUT)
+DaSwitch.off()
+LED.LED.value(1) # 1 is off. Sadly.
 
 #aDeviceString=binascii.hexlify(machine.unique_id()).decode('utf-8')
 aDeviceString="001122AABBC1"
