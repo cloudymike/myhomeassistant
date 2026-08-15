@@ -1,6 +1,38 @@
 #!/bin/bash
 
 
+usage ()
+{
+  echo "USAGE: $0 options"
+  echo "-c     Only update config"
+  echo "-h     Help"
+  echo "-i     IP of mosquitto server"
+  echo "-P     Port to use for USB connection, default: $PORT"
+  exit 0
+}
+
+IP=""
+while getopts "ci:h" arg; do
+  case $arg in
+    c)
+      CONFIGONLY=1
+      ;;
+    h)
+      usage
+      ;;
+    i)
+      IP=$OPTARG
+      ;;
+    P)
+      USBPORT=$OPTARG
+      ;;
+    *) usage
+    ;;
+  esac
+done
+
+
+
 USBPORT=$(ls /dev/ | grep -e ACM)
 if [ "$USBPORT" = "" ]
 then
@@ -19,8 +51,16 @@ echo loading configs
 # Enter your path to your WLAN configuration file here, see ../wlan/wlanconfig.py for example
 $PUSHCMD ~/secrets/wlanconfig.py
 
-# This is just to get the host IP address, you may have to change it
-echo "MQTT_HOST='$(hostname -I | awk '{print $1}')'" >mqtthost.py
+# This is to get the mosquitto host IP address
+cp ../../config/config.py mqtthost.py
+if [ "$IP" = "" ]
+then
+	echo "MQTT_HOST='$(hostname -I | awk '{print $1}')'" >>mqtthost.py
+else
+	echo "MQTT_HOST='$IP'" >>mqtthost.py
+fi
+cat mqtthost.py
+
 $PUSHCMD mqtthost.py
 
 echo loading mha
