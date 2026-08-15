@@ -56,4 +56,4 @@ last_time = time.time()
 
 while True:
     mqtt.loop()
-    print("running")
+#    print("running")
